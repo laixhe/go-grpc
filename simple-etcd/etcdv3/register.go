@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"go.etcd.io/etcd/clientv3"
+	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
 //ServiceRegister 创建租约注册服务
