@@ -1,18 +1,24 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/resolver"
 
 	// 引入 proto 编译生成的包
 	pb "github.com/laixhe/go-grpc/simple"
 
-	"google.golang.org/grpc"
+	"github.com/laixhe/go-grpc/simple-etcd/etcdv3"
 )
 
 const (
 	// Address gRPC 服务地址
 	Address = "127.0.0.1:5501"
+	// ServeName 服务名称
+	ServeName string = "simple_etcd"
 )
 
 var UClient pb.UserClient
@@ -20,8 +26,17 @@ var UClient pb.UserClient
 // 初始化 Grpc 客户端
 func initGrpc() {
 
+	grpcEtcd := etcdv3.NewServiceDiscovery([]string{
+		"localhost:2379",
+	})
+	resolver.Register(grpcEtcd)
+
 	// 连接 GRPC 服务端
-	conn, err := grpc.Dial(Address, grpc.WithInsecure())
+	conn, err := grpc.Dial(
+		fmt.Sprintf("%s:///%s", grpcEtcd.Scheme(), ServeName),
+		grpc.WithBalancerName("round_robin"),
+		grpc.WithInsecure(),
+	)
 	if err != nil {
 		log.Fatalln(err)
 	}
