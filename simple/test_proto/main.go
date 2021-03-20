@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/proto"
+
 	"github.com/laixhe/go-grpc/simple"
 )
 

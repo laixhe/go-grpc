@@ -8,10 +8,10 @@ go mod tidy
 
 #### 生成工具 - protoc 插件
 ```
-# protoc v3.15.5
+# protoc v3.15.6
 https://github.com/protocolbuffers/protobuf/releases
 
-# protoc-gen-go v1.25.0
+# protoc-gen-go v1.26.0
 https://github.com/protocolbuffers/protobuf-go/releases
 
 # protoc-gen-go-grpc v1.1.0
