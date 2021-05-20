@@ -1,6 +1,8 @@
-#### 确保开启了 go module 模式
+#### 需要 Golang 1.16 以上
+> 确保开启了 go module 模式
+
 ```
-# 代理
+# 设置代理
 GOPROXY=https://goproxy.io,direct
 # 当前项目下
 go mod tidy
@@ -8,14 +10,17 @@ go mod tidy
 
 #### 生成工具 - protoc 插件
 ```
-# protoc v3.15.6
-https://github.com/protocolbuffers/protobuf/releases
+# protoc
+https://github.com/protocolbuffers/protobuf/releases/tag/v3.15.8
+protoc --version
 
-# protoc-gen-go v1.26.0
-https://github.com/protocolbuffers/protobuf-go/releases
+# protoc-gen-go
+go get google.golang.org/protobuf/cmd/protoc-gen-go@v1.26.0
+protoc-gen-go --version
 
-# protoc-gen-go-grpc v1.1.0
-https://github.com/grpc/grpc-go/releases
+# protoc-gen-go-grpc
+go get google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0
+protoc-gen-go-grpc --version
 ```
 
 #### proto 文件编译
@@ -28,7 +33,7 @@ protoc 参数说明
 --go_out         生成的 go 源码保存目录
 ```
 
-#### etcd 单机版 v3.4.15
+#### etcd 单机版 v3.4.16
 ```
 ./etcd --listen-client-urls=http://0.0.0.0:2379 --advertise-client-urls=http://0.0.0.0:2379
 ```
