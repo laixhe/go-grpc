@@ -18,7 +18,7 @@ func (u *User) GetUser(cxt context.Context, req *pb.GetUserRequest) (*pb.GetUser
 	// 待返回数据结构
 	res := new(pb.GetUserResponse)
 	res.Userid = req.Userid
-	res.Username = "laixhe-etcd"
+	res.Username = "laixhe"
 	res.Sex = pb.UserSex_MEN
 
 	return res, nil
@@ -29,7 +29,7 @@ func (u *User) GetUserList(cxt context.Context, req *pb.GetUserListRequest) (*pb
 
 	list := make([]*pb.GetUserResponse, 0, 3)
 	for i := 1; i <= 3; i++ {
-		list = append(list, &pb.GetUserResponse{Userid: int64(i), Username: "laiki-etcd-" + strconv.Itoa(i), Sex: pb.UserSex_MEN})
+		list = append(list, &pb.GetUserResponse{Userid: int64(i), Username: "laiki-kratos-" + strconv.Itoa(i), Sex: pb.UserSex_MEN})
 	}
 	// 待返回数据结构
 	resp := new(pb.UserListResponse)

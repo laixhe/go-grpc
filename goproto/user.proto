@@ -1,11 +1,11 @@
 syntax = "proto3";	// 指定proto版本
 
-package simple;	    // 指定包名
+package goproto;	    // 指定包名
 
 // 生成 go文件 的包路径
 // . 表示生成的 go文件 的存放地址，会自动生成目录的
 // simple 表示生成的 go文件 所属的包名
-option go_package = "./;simple";
+option go_package = "./;goproto";
 
 // 定义 User 服务
 service User {

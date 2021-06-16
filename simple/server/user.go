@@ -5,15 +5,15 @@ import (
 	"strconv"
 
 	// 引入 proto 编译生成的包
-	pb "github.com/laixhe/go-grpc/simple"
+	pb "github.com/laixhe/go-grpc/goproto"
 )
 
-// 定义 User 并实现约定的接口
+// User 定义并实现约定的接口
 type User struct {
 	pb.UnimplementedUserServer
 }
 
-// 获取某个 user 数据
+// GetUser 获取某个 user 数据
 func (u *User) GetUser(cxt context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
 	// 待返回数据结构
 	res := new(pb.GetUserResponse)
@@ -24,7 +24,7 @@ func (u *User) GetUser(cxt context.Context, req *pb.GetUserRequest) (*pb.GetUser
 	return res, nil
 }
 
-// 获取 user 所有数据
+// GetUserList 获取 user 所有数据
 func (u *User) GetUserList(cxt context.Context, req *pb.GetUserListRequest) (*pb.UserListResponse, error) {
 
 	list := make([]*pb.GetUserResponse, 0, 3)

@@ -7,9 +7,9 @@ import (
 	"google.golang.org/grpc"
 
 	// 引入 proto 编译生成的包
-	pb "github.com/laixhe/go-grpc/simple"
+	pb "github.com/laixhe/go-grpc/goproto"
 
-	"github.com/laixhe/go-grpc/simple-etcd/etcdv3"
+	"github.com/laixhe/goutil/grpc/etcd"
 )
 
 const (
@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("开始监听 Grpc 端口 0.0.0.0:5501")
 
 	// 服务注册
-	ser, err := etcdv3.NewServiceRegister([]string{
+	ser, err := etcd.NewServiceRegister([]string{
 		"localhost:2379",
 	}, ServeName, ServeRegisterAddress, 5)
 	if err != nil {

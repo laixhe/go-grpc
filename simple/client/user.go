@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	// 引入 proto 编译生成的包
-	pb "github.com/laixhe/go-grpc/simple"
+	pb "github.com/laixhe/go-grpc/goproto"
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {

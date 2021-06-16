@@ -5,7 +5,7 @@ import (
 	"net"
 
 	// 引入 proto 编译生成的包
-	pb "github.com/laixhe/go-grpc/simple"
+	pb "github.com/laixhe/go-grpc/goproto"
 
 	"google.golang.org/grpc"
 )

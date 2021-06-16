@@ -9,9 +9,9 @@ import (
 	"google.golang.org/grpc/resolver"
 
 	// 引入 proto 编译生成的包
-	pb "github.com/laixhe/go-grpc/simple"
+	pb "github.com/laixhe/go-grpc/goproto"
 
-	"github.com/laixhe/go-grpc/simple-etcd/etcdv3"
+	"github.com/laixhe/goutil/grpc/etcd"
 )
 
 const (
@@ -26,7 +26,7 @@ var UClient pb.UserClient
 // 初始化 Grpc 客户端
 func initGrpc() {
 
-	grpcEtcd := etcdv3.NewServiceDiscovery([]string{
+	grpcEtcd := etcd.NewServiceDiscovery([]string{
 		"localhost:2379",
 	})
 	resolver.Register(grpcEtcd)

@@ -5,18 +5,19 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"github.com/laixhe/go-grpc/simple"
+	// 引入 proto 编译生成的包
+	pb "github.com/laixhe/go-grpc/goproto"
 )
 
 // 进行编解码 protobuf
 func main() {
 
-	res := new(simple.UserListResponse)
-	var getdata []*simple.GetUserResponse
+	res := new(pb.UserListResponse)
+	var getdata []*pb.GetUserResponse
 
 	for i := 0; i <= 3; i++ {
 
-		getdata = append(getdata, &simple.GetUserResponse{Userid: int64(i), Username: "laiki", Sex: simple.UserSex_MEN})
+		getdata = append(getdata, &pb.GetUserResponse{Userid: int64(i), Username: "laiki", Sex: pb.UserSex_MEN})
 
 	}
 	res.List = getdata
@@ -30,7 +31,7 @@ func main() {
 		return
 	}
 
-	resp := new(simple.UserListResponse)
+	resp := new(pb.UserListResponse)
 
 	// 进行解码 protobuf
 	err = proto.Unmarshal(data, resp)
