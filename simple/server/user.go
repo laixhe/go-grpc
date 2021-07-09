@@ -4,6 +4,9 @@ import (
 	"context"
 	"strconv"
 
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+
 	// 引入 proto 编译生成的包
 	pb "github.com/laixhe/go-grpc/goproto"
 )
@@ -15,6 +18,10 @@ type User struct {
 
 // GetUser 获取某个 user 数据
 func (u *User) GetUser(cxt context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
+	if req.Userid <= 0 {
+		return nil, status.Errorf(codes.NotFound, "userid not exist.")
+	}
+
 	// 待返回数据结构
 	res := new(pb.GetUserResponse)
 	res.Userid = req.Userid

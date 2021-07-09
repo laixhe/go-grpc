@@ -16,8 +16,8 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	userid := r.FormValue("userid")
 	id, err := strconv.ParseInt(userid, 10, 0)
 	if err != nil {
-		w.Write([]byte("userid The parameters must be integers"))
-		return
+		//w.Write([]byte("userid The parameters must be integers"))
+		//return
 	}
 
 	// 调用 Grpc 的远程接口

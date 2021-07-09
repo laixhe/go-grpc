@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 
@@ -17,18 +18,32 @@ const (
 
 var UClient pb.UserClient
 
+// 一元拦截器
+// method 请求方法字符串，req 包含请求的所有信息参数等
+// reply 在实际 RPC 调用后存储响应信息，通过 invoker 实际调用
+func unaryClientInterceptor(ctx context.Context, method string, req, reply interface{},
+	cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+	// 前置处理阶段
+	log.Println("method: " + method)
+	// 实际的RPC调用
+	err := invoker(ctx, method, req, reply, cc, opts...)
+	// 后置处理
+	log.Println(reply)
+	return err
+}
+
 // 初始化 Grpc 客户端
 func initGrpc() {
 
-	// 连接 GRPC 服务端
-	conn, err := grpc.Dial(Address, grpc.WithInsecure())
+	// 连接 GRPC 服务端，并设置拦截器
+	conn, err := grpc.Dial(Address, grpc.WithInsecure(), grpc.WithUnaryInterceptor(unaryClientInterceptor))
 	if err != nil {
 		log.Fatalln(err)
 	}
 	// 关闭连接
 	//defer conn.Close()
 
-	// 初始化 User 客户端
+	// 初始化 User 客户端，利用它调用远程方法
 	UClient = pb.NewUserClient(conn)
 
 	log.Println("初始化 Grpc 客户端成功")
